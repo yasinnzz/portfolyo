@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Tasarım & Geliştirme Portfolyosu</title>
+    <title>Premium Portfolyo</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;500;700&display=swap');
+
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --accent: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
             margin: 0;
-            padding: 40px 20px;
-            line-height: 1.6;
+            padding: 50px 20px;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
@@ -28,137 +41,205 @@
 
         h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            letter-spacing: 3px;
+            font-size: 4.5rem;
+            letter-spacing: 4px;
             margin: 0;
-            color: #ffffff;
-            text-transform: uppercase;
+            background: linear-gradient(to right, #38bdf8, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        p.subtitle {
-            color: #a0a0a0;
-            font-size: 1.1rem;
-            margin-top: 10px;
+        .search-box {
+            margin: 30px auto;
+            max-width: 500px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid var(--card-border);
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
         }
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        .portfolio-item {
-            background-color: #1e1e1e;
-            padding: 25px 20px;
-            border-radius: 8px;
-            border-left: 4px solid #ffffff;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
             display: flex;
             align-items: center;
-            word-break: break-all;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            background-color: #2a2a2a;
-            border-left: 4px solid #4da6ff;
-        }
-
-        .portfolio-item a {
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
-            color: #e0e0e0;
-            font-weight: 600;
-            font-size: 1rem;
-            width: 100%;
-            transition: color 0.3s ease;
+            color: var(--text-main);
+            overflow: hidden;
+            position: relative;
         }
 
-        .portfolio-item:hover a {
-            color: #4da6ff;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            .portfolio-grid { grid-template-columns: 1fr; }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.1);
+            background: rgba(255, 255, 255, 0.08);
         }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #fff;
+            padding: 5px;
+            object-fit: contain;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .card-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0 0 4px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-link-text {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-link-text svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-link-text svg {
+            transform: translateX(3px) translateY(-3px);
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>Projeler & Portfolyo</h1>
-            <p class="subtitle">Geliştirilen ve yönetilen web projeleri listesi</p>
+            <h1>Portfolyo</h1>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Siteler arasında ara... (Örn: acev)">
+            </div>
         </header>
 
-        <div class="portfolio-grid">
-            <div class="portfolio-item"><a href="http://adalarkentkonseyi.com/" target="_blank">adalarkentkonseyi.com</a></div>
-            <div class="portfolio-item"><a href="http://www.acev.org/" target="_blank">acev.org</a></div>
-            <div class="portfolio-item"><a href="http://adalar.bel.tr/" target="_blank">adalar.bel.tr</a></div>
-            <div class="portfolio-item"><a href="http://aksansomine.com.tr/" target="_blank">aksansomine.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://anastasia-garden.com/" target="_blank">anastasia-garden.com</a></div>
-            <div class="portfolio-item"><a href="http://banuguven.com.tr/" target="_blank">banuguven.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://frekansorg.com/" target="_blank">frekansorg.com</a></div>
-            <div class="portfolio-item"><a href="http://semidelareyna.com/" target="_blank">semidelareyna.com</a></div>
-            <div class="portfolio-item"><a href="https://www.aselchem.com.tr/" target="_blank">aselchem.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://asylegal.com/" target="_blank">asylegal.com</a></div>
-            <div class="portfolio-item"><a href="http://bgtekstil.com/" target="_blank">bgtekstil.com</a></div>
-            <div class="portfolio-item"><a href="https://www.beykozkonaklari.org/" target="_blank">beykozkonaklari.org</a></div>
-            <div class="portfolio-item"><a href="https://bossfabric.com.tr/" target="_blank">bossfabric.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://buyukada.org/" target="_blank">buyukada.org</a></div>
-            <div class="portfolio-item"><a href="http://cafezone.com.tr/" target="_blank">cafezone.com.tr</a></div>
-            <div class="portfolio-item"><a href="https://www.celox-hk.com/" target="_blank">celox-hk.com</a></div>
-            <div class="portfolio-item"><a href="https://cemilozerblog.com/" target="_blank">cemilozerblog.com</a></div>
-            <div class="portfolio-item"><a href="https://datcakamping.com/" target="_blank">datcakamping.com</a></div>
-            <div class="portfolio-item"><a href="http://dregemeneroglu.com/" target="_blank">dregemeneroglu.com</a></div>
-            <div class="portfolio-item"><a href="https://dopplerkaraoke.com/" target="_blank">dopplerkaraoke.com</a></div>
-            <div class="portfolio-item"><a href="http://eceelektronik.com/" target="_blank">eceelektronik.com</a></div>
-            <div class="portfolio-item"><a href="http://edukonpro.com/" target="_blank">edukonpro.com</a></div>
-            <div class="portfolio-item"><a href="http://elifendustriyel.com.tr/" target="_blank">elifendustriyel.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://evbharat.com/" target="_blank">evbharat.com</a></div>
-            <div class="portfolio-item"><a href="http://eyldenim.com/" target="_blank">eyldenim.com</a></div>
-            <div class="portfolio-item"><a href="http://firmametal.com/" target="_blank">firmametal.com</a></div>
-            <div class="portfolio-item"><a href="http://fooders.com.tr/" target="_blank">fooders.com.tr</a></div>
-            <div class="portfolio-item"><a href="https://fipronet.com/" target="_blank">fipronet.com</a></div>
-            <div class="portfolio-item"><a href="http://gunesgumruk.com.tr/" target="_blank">gunesgumruk.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://incomarinspection.com/" target="_blank">incomarinspection.com</a></div>
-            <div class="portfolio-item"><a href="http://indeksiletisim.com/" target="_blank">indeksiletisim.com</a></div>
-            <div class="portfolio-item"><a href="https://www.istanbulreklamsitesi.com/" target="_blank">istanbulreklamsitesi.com</a></div>
-            <div class="portfolio-item"><a href="http://kssstrateji.com/" target="_blank">kssstrateji.com</a></div>
-            <div class="portfolio-item"><a href="https://lencopikap.com/" target="_blank">lencopikap.com</a></div>
-            <div class="portfolio-item"><a href="http://logico.com.tr/" target="_blank">logico.com.tr</a></div>
-            <div class="portfolio-item"><a href="https://bbcouture.com.tr/" target="_blank">bbcouture.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://metalcati.com/" target="_blank">metalcati.com</a></div>
-            <div class="portfolio-item"><a href="http://mezikiotel.com/" target="_blank">mezikiotel.com</a></div>
-            <div class="portfolio-item"><a href="http://minisculebyebrar.com/" target="_blank">minisculebyebrar.com</a></div>
-            <div class="portfolio-item"><a href="http://muraterbas.shoes/" target="_blank">muraterbas.shoes</a></div>
-            <div class="portfolio-item"><a href="http://nypgida.com/" target="_blank">nypgida.com</a></div>
-            <div class="portfolio-item"><a href="http://oanhealth.com/" target="_blank">oanhealth.com</a></div>
-            <div class="portfolio-item"><a href="http://oldugumuzgibi.com/" target="_blank">oldugumuzgibi.com</a></div>
-            <div class="portfolio-item"><a href="http://pentadent.org/" target="_blank">pentadent.org</a></div>
-            <div class="portfolio-item"><a href="https://ozsi.org/" target="_blank">ozsi.org</a></div>
-            <div class="portfolio-item"><a href="http://porta.com.tr/" target="_blank">porta.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://prodrive.com.tr/" target="_blank">prodrive.com.tr</a></div>
-            <div class="portfolio-item"><a href="http://plusrsolutions.com/" target="_blank">plusrsolutions.com</a></div>
-            <div class="portfolio-item"><a href="http://pusulagroup.org/" target="_blank">pusulagroup.org</a></div>
-            <div class="portfolio-item"><a href="https://ravandalikadinlar.org/" target="_blank">ravandalikadinlar.org</a></div>
-            <div class="portfolio-item"><a href="https://www.seasoning.design/" target="_blank">seasoning.design</a></div>
-            <div class="portfolio-item"><a href="https://selfflowcounselling.co.uk/" target="_blank">selfflowcounselling.co.uk</a></div>
-            <div class="portfolio-item"><a href="https://www.simyatelier.com/" target="_blank">simyatelier.com</a></div>
-            <div class="portfolio-item"><a href="https://www.sistem-bilgi.com/" target="_blank">sistem-bilgi.com</a></div>
-            <div class="portfolio-item"><a href="https://skylinelojistik.com.tr/" target="_blank">skylinelojistik.com.tr</a></div>
-            <div class="portfolio-item"><a href="https://www.solvento.it/" target="_blank">solvento.it</a></div>
-            <div class="portfolio-item"><a href="http://somineaksesuarcisi.com/" target="_blank">somineaksesuarcisi.com</a></div>
-            <div class="portfolio-item"><a href="http://thecait.com/" target="_blank">thecait.com</a></div>
-            <div class="portfolio-item"><a href="https://turyapigrup.com/" target="_blank">turyapigrup.com</a></div>
-            <div class="portfolio-item"><a href="https://www.velasistem.com/" target="_blank">velasistem.com</a></div>
-            <div class="portfolio-item"><a href="https://www.vonahukuk.com/en/" target="_blank">vonahukuk.com</a></div>
-            <div class="portfolio-item"><a href="http://west801.com/" target="_blank">west801.com</a></div>
-            <div class="portfolio-item"><a href="http://yaprakozer.com/" target="_blank">yaprakozer.com</a></div>
-            <div class="portfolio-item"><a href="http://yeninesilecza.com/" target="_blank">yeninesilecza.com</a></div>
-        </div>
+        <div class="portfolio-grid" id="portfolioGrid">
+            </div>
     </div>
 
+    <script>
+        const sites = [
+            "http://adalarkentkonseyi.com/", "http://www.acev.org/", "http://adalar.bel.tr/", "http://aksansomine.com.tr/", 
+            "http://anastasia-garden.com/", "http://banuguven.com.tr/", "http://frekansorg.com/", "http://semidelareyna.com/", 
+            "https://www.aselchem.com.tr/", "http://asylegal.com/", "http://bgtekstil.com/", "https://www.beykozkonaklari.org/", 
+            "https://bossfabric.com.tr/", "http://buyukada.org/", "http://cafezone.com.tr/", "https://www.celox-hk.com/", 
+            "https://cemilozerblog.com/", "https://datcakamping.com/", "http://dregemeneroglu.com/", "https://dopplerkaraoke.com/", 
+            "http://eceelektronik.com/", "http://edukonpro.com/", "http://elifendustriyel.com.tr/", "http://evbharat.com/", 
+            "http://eyldenim.com/", "http://firmametal.com/", "http://fooders.com.tr/", "https://fipronet.com/", 
+            "http://gunesgumruk.com.tr/", "http://incomarinspection.com/", "http://indeksiletisim.com/", "https://www.istanbulreklamsitesi.com/", 
+            "http://kssstrateji.com/", "https://lencopikap.com/", "http://logico.com.tr/", "https://bbcouture.com.tr/", 
+            "http://metalcati.com/", "http://mezikiotel.com/", "http://minisculebyebrar.com/", "http://muraterbas.shoes/", 
+            "http://nypgida.com/", "http://oanhealth.com/", "http://oldugumuzgibi.com/", "http://pentadent.org/", 
+            "https://ozsi.org/", "http://porta.com.tr/", "http://prodrive.com.tr/", "http://plusrsolutions.com/", 
+            "http://pusulagroup.org/", "https://ravandalikadinlar.org/", "https://www.seasoning.design/", "https://selfflowcounselling.co.uk/", 
+            "https://www.simyatelier.com/", "https://www.sistem-bilgi.com/", "https://skylinelojistik.com.tr/", "https://www.solvento.it/", 
+            "http://somineaksesuarcisi.com/", "http://thecait.com/", "https://turyapigrup.com/", "https://www.velasistem.com/", 
+            "https://www.vonahukuk.com/en/", "http://west801.com/", "http://yaprakozer.com/", "http://yeninesilecza.com/"
+        ];
+
+        const grid = document.getElementById('portfolioGrid');
+        const searchInput = document.getElementById('searchInput');
+
+        // URL'den sadece domain adını çıkaran fonksiyon
+        const cleanDomain = (url) => {
+            return url.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+        };
+
+        const renderSites = (filterText = '') => {
+            grid.innerHTML = '';
+            
+            const filteredSites = sites.filter(site => 
+                site.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            filteredSites.forEach(url => {
+                const domain = cleanDomain(url);
+                // Google Favicon API (128px yüksek çözünürlüklü ikonlar için)
+                const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+
+                const card = document.createElement('a');
+                card.href = url;
+                card.target = "_blank";
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${faviconUrl}" alt="${domain} Logo" class="card-icon" onerror="this.src='https://via.placeholder.com/128?text=🔗'">
+                    <div class="card-content">
+                        <p class="card-title">${domain}</p>
+                        <p class="card-link-text">
+                            Ziyaret Et
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        };
+
+        // Sayfa yüklendiğinde tüm siteleri render et
+        renderSites();
+
+        // Arama çubuğu dinleyicisi
+        searchInput.addEventListener('input', (e) => {
+            renderSites(e.target.value);
+        });
+    </script>
 </body>
 </html>
