@@ -46,4 +46,383 @@
             gap: 40px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            margin-bottom:
+            margin-bottom: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-border);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+            flex-shrink: 0;
+            background-color: #1e293b;
+        }
+
+        .profile-content {
+            flex: 1;
+        }
+
+        .profile-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+            margin: 0 0 5px 0;
+            background: linear-gradient(to right, #38bdf8, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-subtitle {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-bio {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .skill-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* --- FILTRELER & ARAMA --- */
+        .controls-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: #0f172a;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 25px;
+            border-radius: 30px;
+            border: 1px solid var(--card-border);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        /* --- PORTFOLYO GRID --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: var(--text-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #fff;
+            padding: 5px;
+            object-fit: contain;
+        }
+
+        .card-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin: 0 0 5px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 5px 0;
+        }
+
+        .card-link-text {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .contact-info {
+                justify-content: center;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .skills-container {
+                justify-content: center;
+            }
+            .profile-title {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="profile-section">
+            <img src="https://via.placeholder.com/180x180/1e293b/38bdf8?text=FOTO" alt="Yasin Emre Özen" class="profile-image">
+            
+            <div class="profile-content">
+                <h1 class="profile-title">Yasin Emre Özen</h1>
+                <h2 class="profile-subtitle">Web Tasarımcı & Geliştirici</h2>
+                
+                <p class="profile-bio">
+                    Web siteleri tasarımı alanında yaklaşık 8 yıllık tecrübemle, birebir iletişimi kuvvetli ve sorun çözümüne dayalı çalışma prensibini benimsiyorum. Ağırlıklı olarak WordPress ve PHP tabanlı projeler üretiyor, müşterilerimle fikir alışverişi içinde butik bir hizmet sunuyorum.
+                </p>
+
+                <div class="skills-container">
+                    <span class="skill-badge">WordPress</span>
+                    <span class="skill-badge">PHP</span>
+                    <span class="skill-badge">HTML / CSS</span>
+                    <span class="skill-badge">Photoshop</span>
+                    <span class="skill-badge">E-Ticaret</span>
+                </div>
+
+                <div class="contact-info">
+                    <span>📍 İstanbul / Turkey</span>
+                    <a href="mailto:yasinozen@outlook.com">✉️ yasinozen@outlook.com</a>
+                    <a href="tel:+905332205297">📞 0533 220 52 97</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <div class="filters" id="filterButtons">
+                <button class="filter-btn active" data-filter="Tümü">Tümü</button>
+                <button class="filter-btn" data-filter="Kurumsal">Kurumsal</button>
+                <button class="filter-btn" data-filter="E-Ticaret">E-Ticaret</button>
+                <button class="filter-btn" data-filter="Kurum / STK">Kurum / STK</button>
+                <button class="filter-btn" data-filter="Kişisel / Blog">Kişisel / Blog</button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Portfolyoda ara... (Örn: acev)">
+            </div>
+        </div>
+
+        <div class="portfolio-grid" id="portfolioGrid">
+            </div>
+
+    </div>
+
+    <script>
+        // Siteler ve tahmini kategorileri (Alan adlarına göre optimize edilmiştir)
+        const rawSites = [
+            "http://adalarkentkonseyi.com/", "http://www.acev.org/", "http://adalar.bel.tr/", "http://aksansomine.com.tr/", 
+            "http://anastasia-garden.com/", "http://banuguven.com.tr/", "http://frekansorg.com/", "http://semidelareyna.com/", 
+            "https://www.aselchem.com.tr/", "http://asylegal.com/", "http://bgtekstil.com/", "https://www.beykozkonaklari.org/", 
+            "https://bossfabric.com.tr/", "http://buyukada.org/", "http://cafezone.com.tr/", "https://www.celox-hk.com/", 
+            "https://cemilozerblog.com/", "https://datcakamping.com/", "http://dregemeneroglu.com/", "https://dopplerkaraoke.com/", 
+            "http://eceelektronik.com/", "http://edukonpro.com/", "http://elifendustriyel.com.tr/", "http://evbharat.com/", 
+            "http://eyldenim.com/", "http://firmametal.com/", "http://fooders.com.tr/", "https://fipronet.com/", 
+            "http://gunesgumruk.com.tr/", "http://incomarinspection.com/", "http://indeksiletisim.com/", "https://www.istanbulreklamsitesi.com/", 
+            "http://kssstrateji.com/", "https://lencopikap.com/", "http://logico.com.tr/", "https://bbcouture.com.tr/", 
+            "http://metalcati.com/", "http://mezikiotel.com/", "http://minisculebyebrar.com/", "http://muraterbas.shoes/", 
+            "http://nypgida.com/", "http://oanhealth.com/", "http://oldugumuzgibi.com/", "http://pentadent.org/", 
+            "https://ozsi.org/", "http://porta.com.tr/", "http://prodrive.com.tr/", "http://plusrsolutions.com/", 
+            "http://pusulagroup.org/", "https://ravandalikadinlar.org/", "https://www.seasoning.design/", "https://selfflowcounselling.co.uk/", 
+            "https://www.simyatelier.com/", "https://www.sistem-bilgi.com/", "https://skylinelojistik.com.tr/", "https://www.solvento.it/", 
+            "http://somineaksesuarcisi.com/", "http://thecait.com/", "https://turyapigrup.com/", "https://www.velasistem.com/", 
+            "https://www.vonahukuk.com/en/", "http://west801.com/", "http://yaprakozer.com/", "http://yeninesilecza.com/"
+        ];
+
+        // Kategorilendirme Mantığı
+        const portfolioData = rawSites.map(url => {
+            let category = "Kurumsal"; // Varsayılan
+            
+            if(url.includes(".shoes") || url.includes("couture") || url.includes("tekstil") || url.includes("denim")) {
+                category = "E-Ticaret";
+            } else if(url.includes(".org") || url.includes(".bel.tr") || url.includes("konseyi")) {
+                category = "Kurum / STK";
+            } else if(url.includes("blog") || url.includes("dr") || url.includes("banuguven") || url.includes("yaprakozer")) {
+                category = "Kişisel / Blog";
+            }
+
+            return { url: url, category: category };
+        });
+
+        const grid = document.getElementById('portfolioGrid');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        let currentFilter = "Tümü";
+        let searchQuery = "";
+
+        const cleanDomain = (url) => {
+            return url.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+        };
+
+        const renderSites = () => {
+            grid.innerHTML = '';
+            
+            const filteredData = portfolioData.filter(item => {
+                const matchesSearch = item.url.toLowerCase().includes(searchQuery.toLowerCase());
+                const matchesCategory = currentFilter === "Tümü" || item.category === currentFilter;
+                return matchesSearch && matchesCategory;
+            });
+
+            filteredData.forEach(item => {
+                const domain = cleanDomain(item.url);
+                const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+
+                const card = document.createElement('a');
+                card.href = item.url;
+                card.target = "_blank";
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${faviconUrl}" alt="${domain} Logo" class="card-icon" onerror="this.src='https://via.placeholder.com/128?text=🔗'">
+                    <div class="card-content">
+                        <p class="card-category">${item.category}</p>
+                        <p class="card-title">${domain}</p>
+                        <p class="card-link-text">Görüntüle ↗</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        };
+
+        // Arama Eventi
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderSites();
+        });
+
+        // Filtre Butonları Eventi
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.getAttribute('data-filter');
+                renderSites();
+            });
+        });
+
+        // Başlangıç Render
+        renderSites();
+    </script>
+</body>
+</html>
