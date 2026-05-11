@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Tasarım & Geliştirme Portfolyosu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            letter-spacing: 3px;
+            margin: 0;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        p.subtitle {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            background-color: #1e1e1e;
+            padding: 25px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffffff;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            word-break: break-all;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            background-color: #2a2a2a;
+            border-left: 4px solid #4da6ff;
+        }
+
+        .portfolio-item a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+            transition: color 0.3s ease;
+        }
+
+        .portfolio-item:hover a {
+            color: #4da6ff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Projeler & Portfolyo</h1>
+            <p class="subtitle">Geliştirilen ve yönetilen web projeleri listesi</p>
+        </header>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item"><a href="http://adalarkentkonseyi.com/" target="_blank">adalarkentkonseyi.com</a></div>
+            <div class="portfolio-item"><a href="http://www.acev.org/" target="_blank">acev.org</a></div>
+            <div class="portfolio-item"><a href="http://adalar.bel.tr/" target="_blank">adalar.bel.tr</a></div>
+            <div class="portfolio-item"><a href="http://aksansomine.com.tr/" target="_blank">aksansomine.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://anastasia-garden.com/" target="_blank">anastasia-garden.com</a></div>
+            <div class="portfolio-item"><a href="http://banuguven.com.tr/" target="_blank">banuguven.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://frekansorg.com/" target="_blank">frekansorg.com</a></div>
+            <div class="portfolio-item"><a href="http://semidelareyna.com/" target="_blank">semidelareyna.com</a></div>
+            <div class="portfolio-item"><a href="https://www.aselchem.com.tr/" target="_blank">aselchem.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://asylegal.com/" target="_blank">asylegal.com</a></div>
+            <div class="portfolio-item"><a href="http://bgtekstil.com/" target="_blank">bgtekstil.com</a></div>
+            <div class="portfolio-item"><a href="https://www.beykozkonaklari.org/" target="_blank">beykozkonaklari.org</a></div>
+            <div class="portfolio-item"><a href="https://bossfabric.com.tr/" target="_blank">bossfabric.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://buyukada.org/" target="_blank">buyukada.org</a></div>
+            <div class="portfolio-item"><a href="http://cafezone.com.tr/" target="_blank">cafezone.com.tr</a></div>
+            <div class="portfolio-item"><a href="https://www.celox-hk.com/" target="_blank">celox-hk.com</a></div>
+            <div class="portfolio-item"><a href="https://cemilozerblog.com/" target="_blank">cemilozerblog.com</a></div>
+            <div class="portfolio-item"><a href="https://datcakamping.com/" target="_blank">datcakamping.com</a></div>
+            <div class="portfolio-item"><a href="http://dregemeneroglu.com/" target="_blank">dregemeneroglu.com</a></div>
+            <div class="portfolio-item"><a href="https://dopplerkaraoke.com/" target="_blank">dopplerkaraoke.com</a></div>
+            <div class="portfolio-item"><a href="http://eceelektronik.com/" target="_blank">eceelektronik.com</a></div>
+            <div class="portfolio-item"><a href="http://edukonpro.com/" target="_blank">edukonpro.com</a></div>
+            <div class="portfolio-item"><a href="http://elifendustriyel.com.tr/" target="_blank">elifendustriyel.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://evbharat.com/" target="_blank">evbharat.com</a></div>
+            <div class="portfolio-item"><a href="http://eyldenim.com/" target="_blank">eyldenim.com</a></div>
+            <div class="portfolio-item"><a href="http://firmametal.com/" target="_blank">firmametal.com</a></div>
+            <div class="portfolio-item"><a href="http://fooders.com.tr/" target="_blank">fooders.com.tr</a></div>
+            <div class="portfolio-item"><a href="https://fipronet.com/" target="_blank">fipronet.com</a></div>
+            <div class="portfolio-item"><a href="http://gunesgumruk.com.tr/" target="_blank">gunesgumruk.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://incomarinspection.com/" target="_blank">incomarinspection.com</a></div>
+            <div class="portfolio-item"><a href="http://indeksiletisim.com/" target="_blank">indeksiletisim.com</a></div>
+            <div class="portfolio-item"><a href="https://www.istanbulreklamsitesi.com/" target="_blank">istanbulreklamsitesi.com</a></div>
+            <div class="portfolio-item"><a href="http://kssstrateji.com/" target="_blank">kssstrateji.com</a></div>
+            <div class="portfolio-item"><a href="https://lencopikap.com/" target="_blank">lencopikap.com</a></div>
+            <div class="portfolio-item"><a href="http://logico.com.tr/" target="_blank">logico.com.tr</a></div>
+            <div class="portfolio-item"><a href="https://bbcouture.com.tr/" target="_blank">bbcouture.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://metalcati.com/" target="_blank">metalcati.com</a></div>
+            <div class="portfolio-item"><a href="http://mezikiotel.com/" target="_blank">mezikiotel.com</a></div>
+            <div class="portfolio-item"><a href="http://minisculebyebrar.com/" target="_blank">minisculebyebrar.com</a></div>
+            <div class="portfolio-item"><a href="http://muraterbas.shoes/" target="_blank">muraterbas.shoes</a></div>
+            <div class="portfolio-item"><a href="http://nypgida.com/" target="_blank">nypgida.com</a></div>
+            <div class="portfolio-item"><a href="http://oanhealth.com/" target="_blank">oanhealth.com</a></div>
+            <div class="portfolio-item"><a href="http://oldugumuzgibi.com/" target="_blank">oldugumuzgibi.com</a></div>
+            <div class="portfolio-item"><a href="http://pentadent.org/" target="_blank">pentadent.org</a></div>
+            <div class="portfolio-item"><a href="https://ozsi.org/" target="_blank">ozsi.org</a></div>
+            <div class="portfolio-item"><a href="http://porta.com.tr/" target="_blank">porta.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://prodrive.com.tr/" target="_blank">prodrive.com.tr</a></div>
+            <div class="portfolio-item"><a href="http://plusrsolutions.com/" target="_blank">plusrsolutions.com</a></div>
+            <div class="portfolio-item"><a href="http://pusulagroup.org/" target="_blank">pusulagroup.org</a></div>
+            <div class="portfolio-item"><a href="https://ravandalikadinlar.org/" target="_blank">ravandalikadinlar.org</a></div>
+            <div class="portfolio-item"><a href="https://www.seasoning.design/" target="_blank">seasoning.design</a></div>
+            <div class="portfolio-item"><a href="https://selfflowcounselling.co.uk/" target="_blank">selfflowcounselling.co.uk</a></div>
+            <div class="portfolio-item"><a href="https://www.simyatelier.com/" target="_blank">simyatelier.com</a></div>
+            <div class="portfolio-item"><a href="https://www.sistem-bilgi.com/" target="_blank">sistem-bilgi.com</a></div>
+            <div class="portfolio-item"><a href="https://skylinelojistik.com.tr/" target="_blank">skylinelojistik.com.tr</a></div>
+            <div class="portfolio-item"><a href="https://www.solvento.it/" target="_blank">solvento.it</a></div>
+            <div class="portfolio-item"><a href="http://somineaksesuarcisi.com/" target="_blank">somineaksesuarcisi.com</a></div>
+            <div class="portfolio-item"><a href="http://thecait.com/" target="_blank">thecait.com</a></div>
+            <div class="portfolio-item"><a href="https://turyapigrup.com/" target="_blank">turyapigrup.com</a></div>
+            <div class="portfolio-item"><a href="https://www.velasistem.com/" target="_blank">velasistem.com</a></div>
+            <div class="portfolio-item"><a href="https://www.vonahukuk.com/en/" target="_blank">vonahukuk.com</a></div>
+            <div class="portfolio-item"><a href="http://west801.com/" target="_blank">west801.com</a></div>
+            <div class="portfolio-item"><a href="http://yaprakozer.com/" target="_blank">yaprakozer.com</a></div>
+            <div class="portfolio-item"><a href="http://yeninesilecza.com/" target="_blank">yeninesilecza.com</a></div>
+        </div>
+    </div>
+
+</body>
+</html>
