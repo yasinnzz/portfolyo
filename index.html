@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasin Emre Özen — Portfolio</title>
+    <title>Yasin Emre Özen — Portfolyo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <style>
@@ -28,10 +28,23 @@
 
         body {
             font-family: 'DM Sans', sans-serif;
-            background: var(--black);
+            background-color: var(--black);
+            background-image: radial-gradient(circle, rgba(255,255,255,0.13) 1px, transparent 1px);
+            background-size: 28px 28px;
             color: var(--t1);
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* Vignette — fades dots toward center so they frame without cluttering */
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 40%, var(--black) 0%, transparent 100%),
+                radial-gradient(ellipse 100% 40% at 50% 100%, var(--black) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Grain */
@@ -418,6 +431,27 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
+        /* Hero elements start invisible; JS drives them in */
+        .hero-left .eyebrow,
+        .hero-left .hero-name,
+        .hero-left .hero-bio,
+        .hero-right { opacity: 0; }
+
+        /* Nav slide in */
+        .nav { animation: navSlide .5s ease both; }
+        @keyframes navSlide {
+            from { opacity: 0; transform: translateY(-10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Avatar wrap */
+        .avatar-wrap { position: relative; width: 100%; }
+        .avatar-wrap .avatar { width: 100%; }
+
+        /* Scramble characters */
+        .scramble-char { display: inline; }
+        .scramble-char.scrambling { color: var(--t3); }
+
         /* RESPONSIVE */
         @media (max-width: 960px) {
             .nav { padding: 16px 24px; }
@@ -446,7 +480,7 @@
 
 <!-- NAV -->
 <nav class="nav">
-    <div class="nav-logo">YEÖ <span>/ Portfolio</span></div>
+    <div class="nav-logo">YEÖ <span>/ Portfolyo</span></div>
     <div class="nav-links">
         <a href="mailto:yasinozen@outlook.com">E-posta</a>
         <a href="tel:+905332205297">0533 220 52 97</a>
@@ -456,15 +490,17 @@
 <!-- HERO -->
 <section class="hero">
     <div class="hero-left">
-        <div class="eyebrow">Web Tasarımcı & Geliştirici — İstanbul</div>
-        <h1 class="hero-name">Yasin Emre<br><span class="dim">Özen</span></h1>
-        <p class="hero-bio">Web siteleri tasarımı alanında yaklaşık 8 yıllık tecrübemle, birebir iletişimi kuvvetli ve sorun çözümüne dayalı çalışma prensibini benimsiyorum. Ağırlıklı olarak WordPress ve PHP tabanlı projeler üretiyor, müşterilerimle fikir alışverişi içinde butik bir hizmet sunuyorum.</p>
+        <div class="eyebrow" id="heroEyebrow">Web Tasarımcı & Geliştirici — İstanbul</div>
+        <h1 class="hero-name" id="heroName">Yasin Emre<br><span class="dim">Özen</span></h1>
+        <p class="hero-bio" id="heroBio">Web siteleri tasarımı alanında yaklaşık 8 yıllık tecrübemle, birebir iletişimi kuvvetli ve sorun çözümüne dayalı çalışma prensibini benimsiyorum. Ağırlıklı olarak WordPress ve PHP tabanlı projeler üretiyor, müşterilerimle fikir alışverişi içinde butik bir hizmet sunuyorum.</p>
     </div>
-    <div class="hero-right">
-        <img src="https://i.ibb.co/b57RB4L7/IMG-72048.jpg" alt="Yasin Emre Özen" class="avatar">
+    <div class="hero-right" id="heroRight">
+        <div class="avatar-wrap">
+            <img src="https://i.ibb.co/b57RB4L7/IMG-72048.jpg" alt="Yasin Emre Özen" class="avatar" id="heroAvatar">
+        </div>
         <div class="hero-meta">
-            <div class="meta-cell"><div class="meta-val">8+</div><div class="meta-label">Yıl Tecrübe</div></div>
-            <div class="meta-cell"><div class="meta-val">60+</div><div class="meta-label">Proje</div></div>
+            <div class="meta-cell"><div class="meta-val" data-count="8" data-suffix="+">0</div><div class="meta-label">Yıl Tecrübe</div></div>
+            <div class="meta-cell"><div class="meta-val" data-count="60" data-suffix="+">0</div><div class="meta-label">Proje</div></div>
             <div class="meta-cell"><div class="meta-val">WP</div><div class="meta-label">WordPress</div></div>
             <div class="meta-cell"><div class="meta-val">PHP</div><div class="meta-label">Backend</div></div>
         </div>
@@ -509,7 +545,7 @@
 
 <!-- FOOTER -->
 <footer class="site-footer">
-    <div class="footer-name">© 2025 Yasin Emre Özen</div>
+    <div class="footer-name">© 2026 Yasin Emre Özen</div>
     <div class="footer-links">
         <a href="mailto:yasinozen@outlook.com">yasinozen@outlook.com</a>
         <a href="#">İstanbul, TR</a>
@@ -703,18 +739,118 @@
     backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    // FILTERS & SEARCH
-    searchInput.addEventListener('input', e => { searchQuery = e.target.value; renderSites(); });
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', e => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            currentFilter = e.target.dataset.filter;
-            renderSites();
-        });
-    });
-
     renderSites();
+
+    // ── HERO ANIMATIONS ──────────────────────────────────────────
+
+    // Utility: fade an element up from below
+    const animFadeUp = (el, delay = 0) => {
+        el.style.opacity    = '0';
+        el.style.transform  = 'translateY(22px)';
+        el.style.transition = `opacity .65s ${delay}s ease, transform .65s ${delay}s cubic-bezier(.2,.8,.3,1)`;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            el.style.opacity   = '1';
+            el.style.transform = 'translateY(0)';
+        }));
+    };
+
+    // 1. SCRAMBLE TEXT — randomises chars then resolves left-to-right
+    const scrambleEl = (el) => {
+        const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        // Walk text nodes, wrap each letter in a span
+        const wrapTextNodes = (node) => {
+            if (node.nodeType === 3) {
+                const letters = node.textContent.split('');
+                const frag    = document.createDocumentFragment();
+                letters.forEach(ch => {
+                    if (ch === ' ' || ch === '\n') {
+                        frag.appendChild(document.createTextNode(ch));
+                    } else {
+                        const s = document.createElement('span');
+                        s.className    = 'scramble-char scrambling';
+                        s.dataset.orig = ch;
+                        s.textContent  = CHARS[Math.floor(Math.random() * CHARS.length)];
+                        frag.appendChild(s);
+                    }
+                });
+                node.parentNode.replaceChild(frag, node);
+            } else if (node.nodeType === 1 && node.tagName !== 'SCRIPT') {
+                [...node.childNodes].forEach(wrapTextNodes);
+            }
+        };
+        wrapTextNodes(el);
+        el.style.opacity = '1';
+
+        const spans    = [...el.querySelectorAll('.scramble-char.scrambling')];
+        const duration = 1000;
+        const stagger  = duration / Math.max(spans.length, 1);
+
+        spans.forEach((span, i) => {
+            // Keep randomising until resolve time
+            const resolveAt = 200 + stagger * i;
+            const shuffleInterval = setInterval(() => {
+                span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+            }, 45);
+            setTimeout(() => {
+                clearInterval(shuffleInterval);
+                span.textContent = span.dataset.orig;
+                span.classList.remove('scrambling');
+            }, resolveAt);
+        });
+    };
+
+    // 2. COUNT-UP for stat numbers
+    const countUp = (el, target, suffix, delayMs) => {
+        const duration = 1100;
+        setTimeout(() => {
+            const startTime = performance.now();
+            const tick = (now) => {
+                const t = Math.min((now - startTime) / duration, 1);
+                const eased = 1 - Math.pow(1 - t, 3);
+                el.textContent = Math.floor(eased * target) + (t >= 1 ? suffix : '');
+                if (t < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        }, delayMs);
+    };
+
+    // 3. SEQUENCE — orchestrate everything
+    const runHeroAnimations = () => {
+        const eyebrow = document.getElementById('heroEyebrow');
+        const nameEl  = document.getElementById('heroName');
+        const bioEl   = document.getElementById('heroBio');
+        const rightEl = document.getElementById('heroRight');
+        const avatar  = document.getElementById('heroAvatar');
+
+        // Eyebrow line slides up
+        animFadeUp(eyebrow, 0.05);
+
+        // Name scrambles in slightly after
+        setTimeout(() => scrambleEl(nameEl), 250);
+
+        // Bio fades up after name starts resolving
+        animFadeUp(bioEl, 0.75);
+
+        // Right column fades up
+        animFadeUp(rightEl, 0.2);
+
+        // Avatar scales in from slightly larger
+        avatar.style.opacity    = '0';
+        avatar.style.transform  = 'scale(1.05)';
+        avatar.style.transition = 'opacity .9s .3s ease, transform .9s .3s cubic-bezier(.2,.8,.3,1)';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            avatar.style.opacity   = '1';
+            avatar.style.transform = 'scale(1)';
+        }));
+
+        // Count-up the numeric stats
+        document.querySelectorAll('.meta-val[data-count]').forEach((el, i) => {
+            countUp(el, parseInt(el.dataset.count), el.dataset.suffix || '', 500 + i * 120);
+        });
+    };
+
+    setTimeout(runHeroAnimations, 60);
 </script>
 </body>
 </html>
