@@ -1,428 +1,720 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasin Emre Özen - Portfolyo</title>
+    <title>Yasin Emre Özen — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
-
         :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --accent: #38bdf8;
-            --accent-hover: #0284c7;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --black:     #080808;
+            --s0:        #101010;
+            --s1:        #161616;
+            --s2:        #1f1f1f;
+            --s3:        #2a2a2a;
+            --border:    rgba(255,255,255,0.07);
+            --border-hi: rgba(255,255,255,0.16);
+            --t1: #efefef;
+            --t2: #7a7a7a;
+            --t3: #404040;
+            --radius: 12px;
+            --radius-lg: 20px;
         }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: var(--text-main);
-            margin: 0;
-            padding: 40px 20px;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--t1);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Grain */
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9999; opacity: .5;
         }
 
-        /* --- PROFIL KARTI (CV ALANI) --- */
-        .profile-section {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 40px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
+        /* NAV */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 48px;
+            background: rgba(8,8,8,0.88);
+            border-bottom: 1px solid var(--border);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            margin-bottom: 50px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-
-        .profile-image {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--card-border);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
-            flex-shrink: 0;
-            background-color: #1e293b;
+        .nav-logo {
+            font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem;
+            letter-spacing: -0.01em; color: var(--t1);
         }
-
-        .profile-content {
-            flex: 1;
+        .nav-logo span { color: var(--t3); font-weight: 400; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            font-size: 0.8rem; color: var(--t2); text-decoration: none;
+            letter-spacing: 0.04em; transition: color .2s;
         }
+        .nav-links a:hover { color: var(--t1); }
 
-        .profile-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
-            letter-spacing: 2px;
-            margin: 0 0 5px 0;
-            background: linear-gradient(to right, #38bdf8, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* HERO */
+        .hero {
+            padding: 150px 48px 72px;
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 340px;
+            align-items: end; gap: 80px;
+            border-bottom: 1px solid var(--border);
         }
-
-        .profile-subtitle {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #e2e8f0;
-            margin: 0 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .eyebrow {
+            font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--t3); margin-bottom: 24px;
+            display: flex; align-items: center; gap: 12px;
+            animation: fadeUp .5s ease both;
         }
-
-        .profile-bio {
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+        .eyebrow::before {
+            content: ''; display: inline-block;
+            width: 24px; height: 1px; background: var(--t3);
         }
-
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+        .hero-name {
+            font-family: 'Syne', sans-serif; font-weight: 800;
+            font-size: clamp(3.2rem, 5.5vw, 5.8rem);
+            line-height: .92; letter-spacing: -0.04em;
+            color: var(--t1); margin-bottom: 28px;
+            animation: fadeUp .5s .08s ease both;
         }
-
-        .skill-badge {
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        .contact-info {
-            display: flex;
-            gap: 20px;
-            font-size: 0.9rem;
-            color: #cbd5e1;
-        }
-
-        .contact-info a {
-            color: var(--accent);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* --- FILTRELER & ARAMA --- */
-        .controls-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 40px;
-            align-items: center;
-        }
-
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .filter-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .filter-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .filter-btn.active {
-            background: var(--accent);
-            color: #0f172a;
-            border-color: var(--accent);
-            font-weight: 600;
-        }
-
-        .search-box {
-            width: 100%;
+        .hero-name .dim { color: var(--t3); }
+        .hero-bio {
+            font-size: .95rem; line-height: 1.78; color: var(--t2);
             max-width: 500px;
+            animation: fadeUp .5s .16s ease both;
         }
 
-        .search-box input {
-            width: 100%;
-            padding: 14px 25px;
-            border-radius: 30px;
-            border: 1px solid var(--card-border);
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
+        .hero-right {
+            display: flex; flex-direction: column; gap: 32px; padding-bottom: 4px;
+            animation: fadeUp .5s .1s ease both;
+        }
+        .avatar {
+            width: 100%; aspect-ratio: 1 / 1;
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+            background: var(--s2);
+            border: 1px solid var(--border);
+            filter: grayscale(20%) contrast(1.05);
+        }
+        .hero-meta {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .meta-cell { background: var(--s0); padding: 18px 20px; }
+        .meta-val {
+            font-family: 'Syne', sans-serif; font-weight: 800;
+            font-size: 1.9rem; letter-spacing: -0.05em; color: var(--t1);
+        }
+        .meta-label {
+            font-size: .68rem; color: var(--t3); text-transform: uppercase;
+            letter-spacing: .1em; margin-top: 2px;
         }
 
-        .search-box input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        /* SKILLS STRIP */
+        .skills-strip {
+            max-width: 1400px; margin: 0 auto;
+            padding: 26px 48px;
+            display: flex; align-items: center; gap: 28px;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
         }
+        .strip-label {
+            font-size: .7rem; color: var(--t3); text-transform: uppercase;
+            letter-spacing: .14em; white-space: nowrap; flex-shrink: 0;
+        }
+        .strip-sep { width: 1px; height: 18px; background: var(--border); flex-shrink: 0; }
+        .skill-tag {
+            font-size: .8rem; color: var(--t2); padding: 5px 15px;
+            border: 1px solid var(--border); border-radius: 100px;
+            white-space: nowrap; transition: all .2s; cursor: default;
+        }
+        .skill-tag:hover { color: var(--t1); border-color: var(--border-hi); background: rgba(255,255,255,.04); }
 
-        /* --- PORTFOLYO GRID --- */
+        /* CONTROLS */
+        .controls {
+            max-width: 1400px; margin: 0 auto;
+            padding: 40px 48px 28px;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 20px; flex-wrap: wrap;
+        }
+        .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+        .filter-btn {
+            font-family: 'DM Sans', sans-serif; font-size: .8rem; font-weight: 500;
+            color: var(--t2); background: transparent;
+            border: 1px solid var(--border); padding: 7px 17px;
+            border-radius: 100px; cursor: pointer; transition: all .2s;
+        }
+        .filter-btn:hover { color: var(--t1); border-color: var(--border-hi); background: rgba(255,255,255,.04); }
+        .filter-btn.active { color: var(--black); background: var(--t1); border-color: var(--t1); font-weight: 600; }
+
+        .search-wrap { position: relative; }
+        .search-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); opacity: .25; pointer-events: none; }
+        .search-input {
+            font-family: 'DM Sans', sans-serif; font-size: .85rem;
+            color: var(--t1); background: var(--s1);
+            border: 1px solid var(--border); border-radius: 100px;
+            padding: 9px 20px 9px 40px; width: 240px; outline: none;
+            transition: all .25s;
+        }
+        .search-input::placeholder { color: var(--t3); }
+        .search-input:focus { border-color: var(--border-hi); background: var(--s2); width: 290px; }
+
+        /* GRID */
+        .portfolio-section {
+            max-width: 1400px; margin: 0 auto;
+            padding: 0 48px 100px;
+        }
+        .result-meta {
+            font-size: .72rem; color: var(--t3); text-transform: uppercase;
+            letter-spacing: .08em; margin-bottom: 20px;
+        }
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
         }
 
+        /* CARD */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-            color: var(--text-main);
-            position: relative;
+            background: var(--s1);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
             overflow: hidden;
+            cursor: pointer;
+            transition: border-color .25s, transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s;
+            animation: fadeUp .4s ease both;
         }
-
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-hi);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0,0,0,.5);
         }
 
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: #fff;
-            padding: 5px;
-            object-fit: contain;
-        }
-
-        .card-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .card-title {
-            font-weight: 600;
-            font-size: 1.05rem;
-            margin: 0 0 5px 0;
-            white-space: nowrap;
+        .card-thumb {
+            position: relative;
+            width: 100%; aspect-ratio: 16 / 10;
             overflow: hidden;
-            text-overflow: ellipsis;
+            background: var(--s2);
         }
 
-        .card-category {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0 0 5px 0;
+        /* Shimmer while loading */
+        .card-thumb::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, var(--s2) 25%, var(--s3) 50%, var(--s2) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.6s infinite;
+            z-index: 1;
+            transition: opacity .4s;
+        }
+        .card-thumb.loaded::before { opacity: 0; pointer-events: none; }
+
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        .card-link-text {
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .card-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: top;
+            display: block;
+            transition: transform .5s ease, opacity .4s;
+            opacity: 0;
+        }
+        .card-thumb img.visible { opacity: 1; }
+        .card:hover .card-thumb img { transform: scale(1.04); }
+
+        .card-overlay {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0);
+            display: flex; align-items: center; justify-content: center;
+            transition: background .3s;
+            z-index: 2;
+        }
+        .card:hover .card-overlay { background: rgba(0,0,0,.35); }
+
+        .overlay-btn {
+            font-family: 'Syne', sans-serif; font-size: .78rem; font-weight: 700;
+            color: var(--t1); background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.25);
+            backdrop-filter: blur(10px);
+            padding: 9px 20px; border-radius: 100px;
+            opacity: 0; transform: translateY(6px) scale(.95);
+            transition: opacity .25s, transform .25s;
+            letter-spacing: .06em; text-transform: uppercase;
+            pointer-events: none;
+        }
+        .card:hover .overlay-btn { opacity: 1; transform: translateY(0) scale(1); }
+
+        .card-footer {
+            padding: 14px 16px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .card-favicon {
+            width: 22px; height: 22px; border-radius: 5px;
+            object-fit: contain; background: var(--s3); flex-shrink: 0;
+        }
+        .card-info { flex: 1; min-width: 0; }
+        .card-domain {
+            font-family: 'Syne', sans-serif; font-size: .88rem; font-weight: 600;
+            color: var(--t1); letter-spacing: -0.01em;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .card-cat {
+            font-size: .68rem; color: var(--t3);
+            text-transform: uppercase; letter-spacing: .1em; margin-top: 1px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .profile-section {
-                flex-direction: column;
-                text-align: center;
-                padding: 30px 20px;
-            }
-            .contact-info {
-                justify-content: center;
-                flex-direction: column;
-                gap: 10px;
-            }
-            .skills-container {
-                justify-content: center;
-            }
-            .profile-title {
-                font-size: 2.8rem;
-            }
+        /* MODAL */
+        .modal-backdrop {
+            position: fixed; inset: 0; z-index: 500;
+            background: rgba(0,0,0,.85);
+            backdrop-filter: blur(16px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px;
+            opacity: 0; pointer-events: none;
+            transition: opacity .3s ease;
+        }
+        .modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+        .modal {
+            background: var(--s1);
+            border: 1px solid var(--border-hi);
+            border-radius: 24px;
+            overflow: hidden;
+            width: 100%; max-width: 940px;
+            max-height: 90vh;
+            display: flex; flex-direction: column;
+            transform: scale(.96) translateY(12px);
+            transition: transform .3s cubic-bezier(.2,.8,.3,1);
+            box-shadow: 0 40px 120px rgba(0,0,0,.7);
+        }
+        .modal-backdrop.open .modal { transform: scale(1) translateY(0); }
+
+        .modal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .modal-title-wrap { display: flex; align-items: center; gap: 12px; }
+        .modal-favicon {
+            width: 26px; height: 26px; border-radius: 6px;
+            object-fit: contain; background: var(--s3);
+        }
+        .modal-domain {
+            font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+            color: var(--t1); letter-spacing: -0.01em;
+        }
+        .modal-cat {
+            font-size: .7rem; color: var(--t3);
+            text-transform: uppercase; letter-spacing: .1em; margin-top: 1px;
+        }
+        .modal-actions { display: flex; align-items: center; gap: 10px; }
+
+        .btn-visit {
+            font-family: 'Syne', sans-serif; font-size: .78rem; font-weight: 700;
+            color: var(--black); background: var(--t1);
+            border: none; padding: 9px 20px; border-radius: 100px;
+            cursor: pointer; text-decoration: none;
+            letter-spacing: .04em; text-transform: uppercase;
+            transition: opacity .2s;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-visit:hover { opacity: .85; }
+
+        .btn-close {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: var(--s3); border: 1px solid var(--border);
+            color: var(--t2); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all .2s; flex-shrink: 0;
+        }
+        .btn-close:hover { background: var(--s2); color: var(--t1); border-color: var(--border-hi); }
+
+        .modal-screenshot {
+            flex: 1; overflow: hidden;
+            position: relative; background: var(--s2);
+            min-height: 360px;
+        }
+        .modal-screenshot::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, var(--s2) 25%, var(--s3) 50%, var(--s2) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.6s infinite;
+            z-index: 1; transition: opacity .4s;
+        }
+        .modal-screenshot.loaded::before { opacity: 0; }
+
+        .modal-screenshot img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: top;
+            display: block; opacity: 0; transition: opacity .5s;
+        }
+        .modal-screenshot img.visible { opacity: 1; }
+
+        /* loading spinner */
+        .modal-spinner {
+            position: absolute; inset: 0; z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity .3s;
+        }
+        .modal-screenshot.loaded .modal-spinner { opacity: 0; pointer-events: none; }
+        .spinner-ring {
+            width: 32px; height: 32px;
+            border: 2px solid var(--s3);
+            border-top-color: var(--t3);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .modal-footer {
+            padding: 12px 20px;
+            border-top: 1px solid var(--border);
+            display: flex; align-items: center; gap: 8px;
+            flex-shrink: 0;
+        }
+        .modal-url {
+            font-size: .75rem; color: var(--t3);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* SITE FOOTER */
+        .site-footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 48px;
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 16px; flex-wrap: wrap;
+        }
+        .footer-name {
+            font-family: 'Syne', sans-serif; font-weight: 700;
+            font-size: .85rem; color: var(--t2);
+        }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { font-size: .8rem; color: var(--t3); text-decoration: none; transition: color .2s; }
+        .footer-links a:hover { color: var(--t1); }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .nav { padding: 16px 24px; }
+            .hero { padding: 120px 24px 56px; grid-template-columns: 1fr; gap: 40px; }
+            .hero-right { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+            .avatar { width: 140px; height: 140px; border-radius: var(--radius); }
+            .hero-meta { flex: 1; min-width: 200px; }
+            .skills-strip, .controls, .portfolio-section, .site-footer { padding-left: 24px; padding-right: 24px; }
+            .modal-screenshot { min-height: 260px; }
+        }
+        @media (max-width: 900px) {
+            .portfolio-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .search-input, .search-input:focus { width: 160px; }
+            .modal { border-radius: 16px; }
+            .btn-visit span { display: none; }
+        }
+        @media (max-width: 420px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <div class="profile-section">
-            <img src="https://i.ibb.co/b57RB4L7/IMG-72048.jpg" alt="Yasin Emre Özen" class="profile-image">
-            
-            <div class="profile-content">
-                <h1 class="profile-title">Yasin Emre Özen</h1>
-                <h2 class="profile-subtitle">Web Tasarımcı & Geliştirici</h2>
-                
-                <p class="profile-bio">
-                    Web siteleri tasarımı alanında yaklaşık 8 yıllık tecrübemle, birebir iletişimi kuvvetli ve sorun çözümüne dayalı çalışma prensibini benimsiyorum. Ağırlıklı olarak WordPress ve PHP tabanlı projeler üretiyor, müşterilerimle fikir alışverişi içinde butik bir hizmet sunuyorum.
-                </p>
-
-                <div class="skills-container">
-                    <span class="skill-badge">WordPress</span>
-                    <span class="skill-badge">PHP</span>
-                    <span class="skill-badge">HTML / CSS</span>
-                    <span class="skill-badge">Photoshop</span>
-                    <span class="skill-badge">E-Ticaret</span>
-                </div>
-
-                <div class="contact-info">
-                    <span>📍 İstanbul / Turkey</span>
-                    <a href="mailto:yasinozen@outlook.com">✉️ yasinozen@outlook.com</a>
-                    <a href="tel:+905332205297">📞 0533 220 52 97</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="controls-section">
-            <div class="filters" id="filterButtons">
-                <button class="filter-btn active" data-filter="Tümü">Tümü</button>
-                <button class="filter-btn" data-filter="Kurumsal">Kurumsal</button>
-                <button class="filter-btn" data-filter="E-Ticaret">E-Ticaret</button>
-                <button class="filter-btn" data-filter="Kurum / STK">Kurum / STK</button>
-                <button class="filter-btn" data-filter="Kişisel / Blog">Kişisel / Blog</button>
-            </div>
-
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Portfolyoda ara... (Örn: acev)">
-            </div>
-        </div>
-
-        <div class="portfolio-grid" id="portfolioGrid">
-            </div>
-
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-logo">YEÖ <span>/ Portfolio</span></div>
+    <div class="nav-links">
+        <a href="mailto:yasinozen@outlook.com">E-posta</a>
+        <a href="tel:+905332205297">0533 220 52 97</a>
     </div>
+</nav>
 
-    <script>
-        // Siteler ve tahmini kategorileri (Alan adlarına göre optimize edilmiştir)
-        const rawSites = [
-            "http://adalarkentkonseyi.com/", "http://www.acev.org/", "http://adalar.bel.tr/", "http://aksansomine.com.tr/", 
-            "http://anastasia-garden.com/", "http://banuguven.com.tr/", "http://frekansorg.com/", "http://semidelareyna.com/", 
-            "https://www.aselchem.com.tr/", "http://asylegal.com/", "http://bgtekstil.com/", "https://www.beykozkonaklari.org/", 
-            "https://bossfabric.com.tr/", "http://buyukada.org/", "http://cafezone.com.tr/", "https://www.celox-hk.com/", 
-            "https://cemilozerblog.com/", "https://datcakamping.com/", "http://dregemeneroglu.com/", "https://dopplerkaraoke.com/", 
-            "http://eceelektronik.com/", "http://edukonpro.com/", "http://elifendustriyel.com.tr/", "http://evbharat.com/", 
-            "http://eyldenim.com/", "http://firmametal.com/", "http://fooders.com.tr/", "https://fipronet.com/", 
-            "http://gunesgumruk.com.tr/", "http://incomarinspection.com/", "http://indeksiletisim.com/", "https://www.istanbulreklamsitesi.com/", 
-            "http://kssstrateji.com/", "https://lencopikap.com/", "http://logico.com.tr/", "https://bbcouture.com.tr/", 
-            "http://metalcati.com/", "http://mezikiotel.com/", "http://minisculebyebrar.com/", "http://muraterbas.shoes/", 
-            "http://nypgida.com/", "http://oanhealth.com/", "http://oldugumuzgibi.com/", "http://pentadent.org/", 
-            "https://ozsi.org/", "http://porta.com.tr/", "http://prodrive.com.tr/", "http://plusrsolutions.com/", 
-            "http://pusulagroup.org/", "https://ravandalikadinlar.org/", "https://www.seasoning.design/", "https://selfflowcounselling.co.uk/", 
-            "https://www.simyatelier.com/", "https://www.sistem-bilgi.com/", "https://skylinelojistik.com.tr/", "https://www.solvento.it/", 
-            "http://somineaksesuarcisi.com/", "http://thecait.com/", "https://turyapigrup.com/", "https://www.velasistem.com/", 
-            "https://www.vonahukuk.com/en/", "http://west801.com/", "http://yaprakozer.com/", "http://yeninesilecza.com/"
-        ];
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-left">
+        <div class="eyebrow">Web Tasarımcı & Geliştirici — İstanbul</div>
+        <h1 class="hero-name">Yasin Emre<br><span class="dim">Özen</span></h1>
+        <p class="hero-bio">Web siteleri tasarımı alanında yaklaşık 8 yıllık tecrübemle, birebir iletişimi kuvvetli ve sorun çözümüne dayalı çalışma prensibini benimsiyorum. Ağırlıklı olarak WordPress ve PHP tabanlı projeler üretiyor, müşterilerimle fikir alışverişi içinde butik bir hizmet sunuyorum.</p>
+    </div>
+    <div class="hero-right">
+        <img src="https://via.placeholder.com/340x340/161616/404040?text=" alt="Yasin Emre Özen" class="avatar">
+        <div class="hero-meta">
+            <div class="meta-cell"><div class="meta-val">8+</div><div class="meta-label">Yıl Tecrübe</div></div>
+            <div class="meta-cell"><div class="meta-val">60+</div><div class="meta-label">Proje</div></div>
+            <div class="meta-cell"><div class="meta-val">WP</div><div class="meta-label">WordPress</div></div>
+            <div class="meta-cell"><div class="meta-val">PHP</div><div class="meta-label">Backend</div></div>
+        </div>
+    </div>
+</section>
 
-        // Kategorilendirme Mantığı
-        const portfolioData = rawSites.map(url => {
-            let category = "Kurumsal"; // Varsayılan
-            
-            if(url.includes(".shoes") || url.includes("couture") || url.includes("tekstil") || url.includes("denim")) {
-                category = "E-Ticaret";
-            } else if(url.includes(".org") || url.includes(".bel.tr") || url.includes("konseyi")) {
-                category = "Kurum / STK";
-            } else if(url.includes("blog") || url.includes("dr") || url.includes("banuguven") || url.includes("yaprakozer")) {
-                category = "Kişisel / Blog";
-            }
+<!-- SKILLS -->
+<div class="skills-strip">
+    <span class="strip-label">Uzmanlık</span>
+    <div class="strip-sep"></div>
+    <span class="skill-tag">WordPress</span>
+    <span class="skill-tag">PHP</span>
+    <span class="skill-tag">HTML / CSS</span>
+    <span class="skill-tag">Photoshop</span>
+    <span class="skill-tag">E-Ticaret</span>
+    <span class="skill-tag">UI / UX</span>
+    <span class="skill-tag">Responsive Tasarım</span>
+</div>
 
-            return { url: url, category: category };
+<!-- CONTROLS -->
+<div class="controls">
+    <div class="filter-group" id="filterButtons">
+        <button class="filter-btn active" data-filter="Tümü">Tümü</button>
+        <button class="filter-btn" data-filter="Kurumsal">Kurumsal</button>
+        <button class="filter-btn" data-filter="E-Ticaret">E-Ticaret</button>
+        <button class="filter-btn" data-filter="Kurum / STK">Kurum / STK</button>
+        <button class="filter-btn" data-filter="Kişisel / Blog">Kişisel / Blog</button>
+    </div>
+    <div class="search-wrap">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Ara...">
+    </div>
+</div>
+
+<!-- GRID -->
+<div class="portfolio-section">
+    <div class="result-meta" id="resultCount"></div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-name">© 2025 Yasin Emre Özen</div>
+    <div class="footer-links">
+        <a href="mailto:yasinozen@outlook.com">yasinozen@outlook.com</a>
+        <a href="#">İstanbul, TR</a>
+    </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal" role="dialog" aria-modal="true">
+        <div class="modal-header">
+            <div class="modal-title-wrap">
+                <img src="" alt="" class="modal-favicon" id="modalFavicon">
+                <div>
+                    <div class="modal-domain" id="modalDomain"></div>
+                    <div class="modal-cat" id="modalCat"></div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <a href="#" target="_blank" rel="noopener" class="btn-visit" id="modalVisitBtn">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                    <span>Siteyi Aç</span>
+                </a>
+                <button class="btn-close" id="modalClose" aria-label="Kapat">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="modal-screenshot" id="modalScreenshot">
+            <div class="modal-spinner"><div class="spinner-ring"></div></div>
+            <img src="" alt="" id="modalImg">
+        </div>
+        <div class="modal-footer">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#404040" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span class="modal-url" id="modalUrl"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const rawSites = [
+        "http://adalarkentkonseyi.com/","http://www.acev.org/","http://adalar.bel.tr/","http://aksansomine.com.tr/",
+        "http://anastasia-garden.com/","http://banuguven.com.tr/","http://frekansorg.com/","http://semidelareyna.com/",
+        "https://www.aselchem.com.tr/","http://asylegal.com/","http://bgtekstil.com/","https://www.beykozkonaklari.org/",
+        "https://bossfabric.com.tr/","http://buyukada.org/","http://cafezone.com.tr/","https://www.celox-hk.com/",
+        "https://cemilozerblog.com/","https://datcakamping.com/","http://dregemeneroglu.com/","https://dopplerkaraoke.com/",
+        "http://eceelektronik.com/","http://edukonpro.com/","http://elifendustriyel.com.tr/","http://evbharat.com/",
+        "http://eyldenim.com/","http://firmametal.com/","http://fooders.com.tr/","https://fipronet.com/",
+        "http://gunesgumruk.com.tr/","http://incomarinspection.com/","http://indeksiletisim.com/","https://www.istanbulreklamsitesi.com/",
+        "http://kssstrateji.com/","https://lencopikap.com/","http://logico.com.tr/","https://bbcouture.com.tr/",
+        "http://metalcati.com/","http://mezikiotel.com/","http://minisculebyebrar.com/","http://muraterbas.shoes/",
+        "http://nypgida.com/","http://oanhealth.com/","http://oldugumuzgibi.com/","http://pentadent.org/",
+        "https://ozsi.org/","http://porta.com.tr/","http://prodrive.com.tr/","http://plusrsolutions.com/",
+        "http://pusulagroup.org/","https://ravandalikadinlan.org/","https://www.seasoning.design/","https://selfflowcounselling.co.uk/",
+        "https://www.simyatelier.com/","https://www.sistem-bilgi.com/","https://skylinelojistik.com.tr/","https://www.solvento.it/",
+        "http://somineaksesuarcisi.com/","http://thecait.com/","https://turyapigrup.com/","https://www.velasistem.com/",
+        "https://www.vonahukuk.com/en/","http://west801.com/","http://yaprakozer.com/","http://yeninesilecza.com/"
+    ];
+
+    const portfolioData = rawSites.map(url => {
+        let category = "Kurumsal";
+        if (url.includes(".shoes") || url.includes("couture") || url.includes("tekstil") || url.includes("denim") || url.includes("fabric") || url.includes("miniscule"))
+            category = "E-Ticaret";
+        else if (url.includes(".org") || url.includes(".bel.tr") || url.includes("konseyi"))
+            category = "Kurum / STK";
+        else if (url.includes("blog") || url.includes("banuguven") || url.includes("yaprakozer") || url.includes("dregemeneroglu"))
+            category = "Kişisel / Blog";
+        return { url, category };
+    });
+
+    const cleanDomain = url => url.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+
+    // thum.io — free, no API key, returns real browser screenshots
+    const getThumb  = url => `https://image.thum.io/get/width/640/crop/480/noanimate/${url}`;
+    const getFullSS = url => `https://image.thum.io/get/width/1200/crop/900/noanimate/${url}`;
+    const getFavicon = domain => `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+
+    // DOM refs
+    const grid        = document.getElementById('portfolioGrid');
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns  = document.querySelectorAll('.filter-btn');
+    const resultCount = document.getElementById('resultCount');
+
+    let currentFilter = "Tümü";
+    let searchQuery   = "";
+
+    const renderSites = () => {
+        grid.innerHTML = '';
+
+        const filtered = portfolioData.filter(item => {
+            const ms = item.url.toLowerCase().includes(searchQuery.toLowerCase());
+            const mc = currentFilter === "Tümü" || item.category === currentFilter;
+            return ms && mc;
         });
 
-        const grid = document.getElementById('portfolioGrid');
-        const searchInput = document.getElementById('searchInput');
-        const filterBtns = document.querySelectorAll('.filter-btn');
+        resultCount.textContent = `${filtered.length} Proje`;
 
-        let currentFilter = "Tümü";
-        let searchQuery = "";
+        filtered.forEach((item, i) => {
+            const domain     = cleanDomain(item.url);
+            const favicon    = getFavicon(domain);
+            const thumbUrl   = getThumb(item.url);
 
-        const cleanDomain = (url) => {
-            return url.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
-        };
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.animationDelay = `${Math.min(i * 0.03, 0.8)}s`;
 
-        const renderSites = () => {
-            grid.innerHTML = '';
-            
-            const filteredData = portfolioData.filter(item => {
-                const matchesSearch = item.url.toLowerCase().includes(searchQuery.toLowerCase());
-                const matchesCategory = currentFilter === "Tümü" || item.category === currentFilter;
-                return matchesSearch && matchesCategory;
-            });
-
-            filteredData.forEach(item => {
-                const domain = cleanDomain(item.url);
-                const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-
-                const card = document.createElement('a');
-                card.href = item.url;
-                card.target = "_blank";
-                card.className = 'card';
-                card.innerHTML = `
-                    <img src="${faviconUrl}" alt="${domain} Logo" class="card-icon" onerror="this.src='https://via.placeholder.com/128?text=🔗'">
-                    <div class="card-content">
-                        <p class="card-category">${item.category}</p>
-                        <p class="card-title">${domain}</p>
-                        <p class="card-link-text">Görüntüle ↗</p>
+            card.innerHTML = `
+                <div class="card-thumb">
+                    <img src="${thumbUrl}" alt="${domain}" loading="lazy">
+                    <div class="card-overlay"><span class="overlay-btn">Önizle</span></div>
+                </div>
+                <div class="card-footer">
+                    <img src="${favicon}" alt="" class="card-favicon" onerror="this.style.opacity=0">
+                    <div class="card-info">
+                        <div class="card-domain">${domain}</div>
+                        <div class="card-cat">${item.category}</div>
                     </div>
-                `;
-                grid.appendChild(card);
-            });
-        };
+                </div>
+            `;
 
-        // Arama Eventi
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value;
+            const thumbEl = card.querySelector('.card-thumb');
+            const imgEl   = card.querySelector('.card-thumb img');
+
+            imgEl.addEventListener('load', () => {
+                imgEl.classList.add('visible');
+                thumbEl.classList.add('loaded');
+            });
+            imgEl.addEventListener('error', () => {
+                thumbEl.classList.add('loaded');
+                imgEl.style.display = 'none';
+                // Elegant fallback with domain initial
+                const seed = domain.charCodeAt(0) + domain.length;
+                const hue  = (seed * 47) % 360;
+                thumbEl.style.background = `hsl(${hue}deg 6% 13%)`;
+                const fb = document.createElement('div');
+                fb.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;';
+                fb.innerHTML = `<span style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:hsl(${hue}deg 6% 22%);letter-spacing:-.04em">${domain.split('.')[0].slice(0,4).toUpperCase()}</span>`;
+                thumbEl.insertBefore(fb, thumbEl.querySelector('.card-overlay'));
+            });
+
+            card.addEventListener('click', () => openModal(item, domain, favicon));
+            grid.appendChild(card);
+        });
+    };
+
+    // MODAL
+    const backdrop     = document.getElementById('modalBackdrop');
+    const modalImg     = document.getElementById('modalImg');
+    const modalShot    = document.getElementById('modalScreenshot');
+    const modalDomainEl = document.getElementById('modalDomain');
+    const modalCatEl   = document.getElementById('modalCat');
+    const modalFaviconEl = document.getElementById('modalFavicon');
+    const modalVisit   = document.getElementById('modalVisitBtn');
+    const modalUrlEl   = document.getElementById('modalUrl');
+    const modalClose   = document.getElementById('modalClose');
+
+    const openModal = (item, domain, favicon) => {
+        modalDomainEl.textContent = domain;
+        modalCatEl.textContent    = item.category;
+        modalFaviconEl.src        = favicon;
+        modalVisit.href           = item.url;
+        modalUrlEl.textContent    = item.url;
+
+        // Reset
+        modalShot.classList.remove('loaded');
+        modalImg.classList.remove('visible');
+        modalImg.src = '';
+
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        // Load high-res screenshot
+        const src = getFullSS(item.url);
+        const tempImg = new Image();
+        tempImg.onload = () => {
+            modalImg.src = src;
+            modalImg.classList.add('visible');
+            modalShot.classList.add('loaded');
+        };
+        tempImg.onerror = () => {
+            modalShot.classList.add('loaded');
+        };
+        tempImg.src = src;
+    };
+
+    const closeModal = () => {
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+    };
+
+    modalClose.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // FILTERS & SEARCH
+    searchInput.addEventListener('input', e => { searchQuery = e.target.value; renderSites(); });
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', e => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            currentFilter = e.target.dataset.filter;
             renderSites();
         });
+    });
 
-        // Filtre Butonları Eventi
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                currentFilter = e.target.getAttribute('data-filter');
-                renderSites();
-            });
-        });
-
-        // Başlangıç Render
-        renderSites();
-    </script>
+    renderSites();
+</script>
 </body>
 </html>
